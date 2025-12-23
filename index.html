@@ -3,13 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fourier Neural Filter as Generic Vision Backbone</title>
+    <meta name="description" content="Fourier Neural Filter (FNF) as Generic Vision Backbone - A unified time-frequency vision backbone achieving SOTA performance on ImageNet, COCO, and ADE20K">
+    <meta name="keywords" content="Computer Vision, Fourier Transform, Vision Backbone, Deep Learning, ICLR 2026">
+    <meta name="author" content="Chenheng Xu, Yuanhao Ban, Dan Wu, Cho-Jui Hsieh, Ying Nian Wu, Yixin Zhu">
+    <title>Fourier Neural Filter as Generic Vision Backbone | ICLR 2026</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-links">
+                <a href="#abstract" class="nav-link">Abstract</a>
+                <a href="#contributions" class="nav-link">Contributions</a>
+                <a href="#method" class="nav-link">Method</a>
+                <a href="#results" class="nav-link">Results</a>
+                <a href="#citation" class="nav-link">Citation</a>
+            </div>
+        </div>
+    </nav>
     <div class="container">
         <!-- Header -->
         <header class="header">
@@ -41,12 +56,34 @@
                 <a href="https://github.com/chenheng-xu/fnf-vision-code" class="btn btn-secondary" target="_blank">💻 Code</a>
                 <a href="https://chenheng-xu.github.io/fnf-vision-page/" class="btn btn-secondary" target="_blank">🌐 Project Page</a>
             </div>
+            <div class="paper-meta">
+                <span class="meta-item"><strong>Conference:</strong> ICLR 2026</span>
+                <span class="meta-item"><strong>Year:</strong> 2025</span>
+                <span class="meta-item"><strong>Venue:</strong> International Conference on Learning Representations</span>
+            </div>
             <div class="badges">
                 <span class="badge">ICLR 2026</span>
                 <span class="badge">Vision Backbone</span>
                 <span class="badge">Fourier Transform</span>
             </div>
         </header>
+
+        <!-- TL;DR Summary -->
+        <section class="section summary-section">
+            <div class="summary-box">
+                <h2 class="summary-title">📌 TL;DR</h2>
+                <div class="summary-content">
+                    <p><strong>We propose Vision Filter (ViF)</strong>, a novel generic backbone for Computer Vision that addresses 
+                    the limitations of Fourier Neural Operator (FNO) by introducing:</p>
+                    <ul class="summary-list">
+                        <li><strong>Adaptive Modulation:</strong> Enhances sensitivity to high-frequency components in the frequency domain</li>
+                        <li><strong>Selective Activation:</strong> Balances local time-domain and global frequency-domain information flow</li>
+                    </ul>
+                    <p><strong>Results:</strong> ViF achieves state-of-the-art performance on ImageNet-1K (85.2%), COCO detection (50.1 Box mAP), 
+                    and ADE20K segmentation (52.3 mIoU) with competitive computational efficiency.</p>
+                </div>
+            </div>
+        </section>
 
         <!-- Teaser/Overview -->
         <section class="section teaser-section">
@@ -74,15 +111,13 @@
                     </div>
                 </div>
                 <div class="teaser-image">
-                    <object data="figures/model_schematic.pdf" type="application/pdf" class="teaser-img pdf-object">
-                        <p>Your browser does not support PDFs. <a href="figures/model_schematic.pdf">Download the PDF</a>.</p>
-                    </object>
+                    <img src="figures/model_schematic.png" alt="ViF Architecture" class="teaser-img" />
                 </div>
             </div>
         </section>
 
         <!-- Abstract -->
-        <section class="section">
+        <section id="abstract" class="section">
             <h2>Abstract</h2>
             <p class="abstract">
                 Effective information extraction has long been a central challenge in Computer Vision. 
@@ -108,7 +143,7 @@
         </section>
 
         <!-- Key Contributions -->
-        <section class="section">
+        <section id="contributions" class="section">
             <h2>Key Contributions</h2>
             <ul class="contributions">
                 <li>We propose <strong>Fourier Neural Filter (FNF)</strong>, the first unified backbone that couples 
@@ -122,7 +157,7 @@
         </section>
 
         <!-- Method Overview -->
-        <section class="section">
+        <section id="method" class="section">
             <h2>Method Overview</h2>
             <div class="method-intro">
                 <p>
@@ -161,15 +196,13 @@
                 </div>
             </div>
             <div class="method-figure">
-                <object data="figures/fnf_backbone.pdf" type="application/pdf" class="method-img pdf-object">
-                    <p>Your browser does not support PDFs. <a href="figures/fnf_backbone.pdf">Download the PDF</a>.</p>
-                </object>
+                <img src="figures/fnf_backbone.png" alt="FNF Backbone Architecture" class="method-img" />
                 <p class="figure-caption"><strong>Figure:</strong> Schematic diagram of our proposed FNF backbone.</p>
             </div>
         </section>
 
         <!-- Results -->
-        <section class="section">
+        <section id="results" class="section">
             <h2>Results</h2>
             
             <div class="results-grid">
@@ -227,9 +260,7 @@
 
             <div class="comparison-visualization">
                 <h3>Model Efficiency Comparison</h3>
-                <object data="figures/model_comparison.pdf" type="application/pdf" class="comparison-img pdf-object">
-                    <p>Your browser does not support PDFs. <a href="figures/model_comparison.pdf">Download the PDF</a>.</p>
-                </object>
+                <img src="figures/model_comparison.png" alt="Model Efficiency Comparison" class="comparison-img" />
                 <p class="figure-caption"><strong>Figure:</strong> Model efficiency comparison on ImageNet-1k. Throughput tested on H100 GPU with batch size 128 and input resolution 224×224.</p>
             </div>
 
@@ -315,9 +346,7 @@
                 addressing the over-smoothing effect and bandwidth bottleneck.</p>
             </div>
             <div class="architecture-visualization">
-                <object data="figures/model_schematic.pdf" type="application/pdf" class="architecture-img pdf-object">
-                    <p>Your browser does not support PDFs. <a href="figures/model_schematic.pdf">Download the PDF</a>.</p>
-                </object>
+                <img src="figures/model_schematic.png" alt="ViF Architecture Schematic" class="architecture-img" />
                 <p class="figure-caption"><strong>Figure:</strong> Schematic diagram of our proposed ViF architecture. Architecture details can be found in the Appendix.</p>
             </div>
         </section>
@@ -488,27 +517,19 @@
                 <h3>Visualization of Ablation Study</h3>
                 <div class="ablation-images">
                     <div class="ablation-image-item">
-                        <object data="figures/input.pdf" type="application/pdf" class="ablation-img pdf-object">
-                            <p><a href="figures/input.pdf">Input</a></p>
-                        </object>
+                        <img src="figures/input.png" alt="Input" class="ablation-img" />
                         <p class="image-label">(a) Input</p>
                     </div>
                     <div class="ablation-image-item">
-                        <object data="figures/am.pdf" type="application/pdf" class="ablation-img pdf-object">
-                            <p><a href="figures/am.pdf">w/o AM</a></p>
-                        </object>
+                        <img src="figures/am.png" alt="Without Adaptive Modulation" class="ablation-img" />
                         <p class="image-label">(b) w/o AM</p>
                     </div>
                     <div class="ablation-image-item">
-                        <object data="figures/sa.pdf" type="application/pdf" class="ablation-img pdf-object">
-                            <p><a href="figures/sa.pdf">w/o SA</a></p>
-                        </object>
+                        <img src="figures/sa.png" alt="Without Selective Activation" class="ablation-img" />
                         <p class="image-label">(c) w/o SA</p>
                     </div>
                     <div class="ablation-image-item">
-                        <object data="figures/full.pdf" type="application/pdf" class="ablation-img pdf-object">
-                            <p><a href="figures/full.pdf">ViF</a></p>
-                        </object>
+                        <img src="figures/full.png" alt="Full ViF" class="ablation-img" />
                         <p class="image-label">(d) ViF</p>
                     </div>
                 </div>
@@ -553,8 +574,91 @@ output = model(input_image)</code></pre>
             </div>
         </section>
 
-        <!-- Citation -->
+        <!-- Related Work -->
         <section class="section">
+            <h2>Related Work</h2>
+            <div class="related-work-grid">
+                <div class="related-work-item">
+                    <h3>Vision Transformer</h3>
+                    <p>Building on the success of Vision Transformer (ViT), subsequent developments have focused on making it more efficient through hierarchical designs like Swin Transformer, PVT, and NAT, establishing ViT as a fundamental architecture for diverse visual tasks.</p>
+                </div>
+                <div class="related-work-item">
+                    <h3>Vision Mamba</h3>
+                    <p>Recent work on Vision Mamba aims to overcome fundamental limitations of directional scanning for 2D visual information processing, including bi-directional and quad-directional scanning approaches.</p>
+                </div>
+                <div class="related-work-item">
+                    <h3>Fourier Transform for Vision</h3>
+                    <p>Previous work has successfully integrated Fourier transform into deep learning systems. GFNet achieves competitive performance with logarithmic linear complexity by replacing self-attention with 2D discrete Fourier transform.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Datasets -->
+        <section class="section">
+            <h2>Datasets</h2>
+            <div class="datasets-grid">
+                <div class="dataset-card">
+                    <h3>ImageNet-1K</h3>
+                    <p><strong>Task:</strong> Image Classification</p>
+                    <p><strong>Images:</strong> 1.28M training, 50K validation</p>
+                    <p><strong>Classes:</strong> 1,000 categories</p>
+                    <p><strong>Input Size:</strong> 224×224</p>
+                </div>
+                <div class="dataset-card">
+                    <h3>COCO</h3>
+                    <p><strong>Task:</strong> Object Detection</p>
+                    <p><strong>Images:</strong> 118K training, 5K validation</p>
+                    <p><strong>Classes:</strong> 80 object categories</p>
+                    <p><strong>Detector:</strong> Mask R-CNN</p>
+                </div>
+                <div class="dataset-card">
+                    <h3>ADE20K</h3>
+                    <p><strong>Task:</strong> Semantic Segmentation</p>
+                    <p><strong>Images:</strong> 20K training, 2K validation</p>
+                    <p><strong>Classes:</strong> 150 semantic categories</p>
+                    <p><strong>Segmentor:</strong> UPerNet</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Implementation Details -->
+        <section class="section">
+            <h2>Implementation Details</h2>
+            <div class="implementation-details">
+                <div class="impl-section">
+                    <h3>Training Configuration</h3>
+                    <ul class="impl-list">
+                        <li><strong>Optimizer:</strong> AdamW</li>
+                        <li><strong>Initial Learning Rate:</strong> 4×10⁻³</li>
+                        <li><strong>Schedule:</strong> Cosine decay with 20-epoch warm-up</li>
+                        <li><strong>Weight Decay:</strong> 0.05</li>
+                        <li><strong>Batch Size:</strong> 2048 (T/S), 1024 (B)</li>
+                        <li><strong>Epochs:</strong> 300</li>
+                        <li><strong>Drop Path:</strong> 0.2 (T), 0.3 (S), 0.5 (B)</li>
+                    </ul>
+                </div>
+                <div class="impl-section">
+                    <h3>Data Augmentation</h3>
+                    <ul class="impl-list">
+                        <li>RandAugment</li>
+                        <li>Mixup</li>
+                        <li>CutMix</li>
+                        <li>Random Erasing</li>
+                        <li>MESA (for overfitting prevention)</li>
+                    </ul>
+                </div>
+                <div class="impl-section">
+                    <h3>Hardware</h3>
+                    <ul class="impl-list">
+                        <li><strong>GPU:</strong> H100</li>
+                        <li><strong>Throughput Testing:</strong> Batch size 128, Resolution 224×224</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Citation -->
+        <section id="citation" class="section">
             <h2>Citation</h2>
             <div class="citation-box">
                 <pre><code>@article{xu2025fourier,
@@ -587,23 +691,6 @@ output = model(input_image)</code></pre>
 
         <!-- Footer -->
         <footer class="footer">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>Contact</h4>
-                    <p>For questions and inquiries, please contact:</p>
-                    <ul class="contact-list">
-                        <li>Cho-Jui Hsieh: <a href="mailto:chohsieh@ucla.edu">chohsieh@ucla.edu</a></li>
-                        <li>Ying Nian Wu: <a href="mailto:ywu@stat.ucla.edu">ywu@stat.ucla.edu</a></li>
-                        <li>Yixin Zhu: <a href="mailto:yixin.zhu@pku.edu.cn">yixin.zhu@pku.edu.cn</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Acknowledgments</h4>
-                    <p>This work is supported in part by the National Natural Science Foundation of China, 
-                    the PKU-BingJi Joint Laboratory for Artificial Intelligence, and the National Comprehensive 
-                    Experimental Base for Governance of Intelligent Society.</p>
-                </div>
-            </div>
             <div class="footer-bottom">
                 <p>&copy; 2025 The Authors. All rights reserved.</p>
                 <p class="footer-note">This work is submitted to ICLR 2026.</p>
