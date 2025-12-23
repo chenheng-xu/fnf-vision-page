@@ -74,10 +74,9 @@
                     </div>
                 </div>
                 <div class="teaser-image">
-                    <div class="image-placeholder">
-                        <p>📊 Model Architecture Diagram</p>
-                        <small>Placeholder for model schematic figure</small>
-                    </div>
+                    <object data="figures/model_schematic.pdf" type="application/pdf" class="teaser-img pdf-object">
+                        <p>Your browser does not support PDFs. <a href="figures/model_schematic.pdf">Download the PDF</a>.</p>
+                    </object>
                 </div>
             </div>
         </section>
@@ -162,10 +161,10 @@
                 </div>
             </div>
             <div class="method-figure">
-                <div class="image-placeholder large">
-                    <p>🏗️ FNF Backbone Architecture</p>
-                    <small>Placeholder for FNF backbone schematic diagram</small>
-                </div>
+                <object data="figures/fnf_backbone.pdf" type="application/pdf" class="method-img pdf-object">
+                    <p>Your browser does not support PDFs. <a href="figures/fnf_backbone.pdf">Download the PDF</a>.</p>
+                </object>
+                <p class="figure-caption"><strong>Figure:</strong> Schematic diagram of our proposed FNF backbone.</p>
             </div>
         </section>
 
@@ -226,8 +225,16 @@
                 </div>
             </div>
 
-            <div class="comparison-table">
+            <div class="comparison-visualization">
                 <h3>Model Efficiency Comparison</h3>
+                <object data="figures/model_comparison.pdf" type="application/pdf" class="comparison-img pdf-object">
+                    <p>Your browser does not support PDFs. <a href="figures/model_comparison.pdf">Download the PDF</a>.</p>
+                </object>
+                <p class="figure-caption"><strong>Figure:</strong> Model efficiency comparison on ImageNet-1k. Throughput tested on H100 GPU with batch size 128 and input resolution 224×224.</p>
+            </div>
+
+            <div class="comparison-table">
+                <h3>Detailed Performance Metrics</h3>
                 <p class="table-note">Throughput tested on H100 GPU with batch size 128 and input resolution 224×224</p>
                 <div class="table-wrapper">
                     <table>
@@ -306,6 +313,77 @@
                 <p><strong>Key Innovation:</strong> Unlike FNO which uses a fixed integral kernel, FNF employs an 
                 input-dependent kernel that adaptively modulates information flow between time and frequency domains, 
                 addressing the over-smoothing effect and bandwidth bottleneck.</p>
+            </div>
+            <div class="architecture-visualization">
+                <object data="figures/model_schematic.pdf" type="application/pdf" class="architecture-img pdf-object">
+                    <p>Your browser does not support PDFs. <a href="figures/model_schematic.pdf">Download the PDF</a>.</p>
+                </object>
+                <p class="figure-caption"><strong>Figure:</strong> Schematic diagram of our proposed ViF architecture. Architecture details can be found in the Appendix.</p>
+            </div>
+        </section>
+
+        <!-- Effective Receptive Field -->
+        <section class="section">
+            <h2>Effective Receptive Field Comparison</h2>
+            <p class="section-intro">
+                We compare the effective receptive field (ERF) characteristics of Transformer, Fourier Neural Filter (FNF), 
+                and Mamba with different scanning strategies. FNF leverages Fourier transforms to operate in the frequency domain, 
+                enabling global receptive field coverage through spectral convolutions with O(N log N) complexity.
+            </p>
+            <div class="erf-visualization">
+                <img src="figures/erf.png" alt="Effective Receptive Field Comparison" class="erf-img" />
+                <p class="figure-caption"><strong>Figure:</strong> Effective Receptive Field Comparison. Transformer and FNF achieve uniform global coverage, 
+                while Mamba variants exhibit distance-dependent patterns influenced by their scanning strategies.</p>
+            </div>
+        </section>
+
+        <!-- Task Visualizations -->
+        <section class="section">
+            <h2>Task Visualizations</h2>
+            <div class="task-visualizations">
+                <div class="task-vis-item">
+                    <h3>Object Detection on COCO</h3>
+                    <img src="figures/det.png" alt="Object Detection Visualization" class="task-img" />
+                    <p class="figure-caption">Visualization of object detection results on COCO dataset.</p>
+                </div>
+                <div class="task-vis-item">
+                    <h3>Semantic Segmentation on ADE20K</h3>
+                    <img src="figures/seg.png" alt="Semantic Segmentation Visualization" class="task-img" />
+                    <p class="figure-caption">Visualization of semantic segmentation results on ADE20K dataset.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Spatial and Frequency Analysis -->
+        <section class="section">
+            <h2>Spatial and Frequency Analysis</h2>
+            <p class="section-intro">
+                We perform comprehensive spatial- and frequency-domain analyses on the fourth-layer features to quantitatively 
+                assess the influence of different modules (SA and AM) on feature representations.
+            </p>
+            <div class="analysis-visualizations">
+                <div class="analysis-grid">
+                    <div class="analysis-item">
+                        <img src="figures/cls1.png" alt="Spatial and Frequency Analysis 1" class="analysis-img" />
+                    </div>
+                    <div class="analysis-item">
+                        <img src="figures/cls2.png" alt="Spatial and Frequency Analysis 2" class="analysis-img" />
+                    </div>
+                    <div class="analysis-item">
+                        <img src="figures/cls3.png" alt="Spatial and Frequency Analysis 3" class="analysis-img" />
+                    </div>
+                    <div class="analysis-item">
+                        <img src="figures/cls4.png" alt="Spatial and Frequency Analysis 4" class="analysis-img" />
+                    </div>
+                    <div class="analysis-item">
+                        <img src="figures/cls5.png" alt="Spatial and Frequency Analysis 5" class="analysis-img" />
+                    </div>
+                    <div class="analysis-item">
+                        <img src="figures/cls6.png" alt="Spatial and Frequency Analysis 6" class="analysis-img" />
+                    </div>
+                </div>
+                <p class="figure-caption"><strong>Figure:</strong> Visualization of spatial and frequency analysis showing the impact of different modules 
+                on feature representations across various input images.</p>
             </div>
         </section>
 
@@ -407,10 +485,34 @@
                 significantly to the model's effectiveness.</p>
             </div>
             <div class="ablation-visualization">
-                <div class="image-placeholder">
-                    <p>📈 Ablation Study Visualization</p>
-                    <small>Placeholder for ablation study figures (AM and SA effects)</small>
+                <h3>Visualization of Ablation Study</h3>
+                <div class="ablation-images">
+                    <div class="ablation-image-item">
+                        <object data="figures/input.pdf" type="application/pdf" class="ablation-img pdf-object">
+                            <p><a href="figures/input.pdf">Input</a></p>
+                        </object>
+                        <p class="image-label">(a) Input</p>
+                    </div>
+                    <div class="ablation-image-item">
+                        <object data="figures/am.pdf" type="application/pdf" class="ablation-img pdf-object">
+                            <p><a href="figures/am.pdf">w/o AM</a></p>
+                        </object>
+                        <p class="image-label">(b) w/o AM</p>
+                    </div>
+                    <div class="ablation-image-item">
+                        <object data="figures/sa.pdf" type="application/pdf" class="ablation-img pdf-object">
+                            <p><a href="figures/sa.pdf">w/o SA</a></p>
+                        </object>
+                        <p class="image-label">(c) w/o SA</p>
+                    </div>
+                    <div class="ablation-image-item">
+                        <object data="figures/full.pdf" type="application/pdf" class="ablation-img pdf-object">
+                            <p><a href="figures/full.pdf">ViF</a></p>
+                        </object>
+                        <p class="image-label">(d) ViF</p>
+                    </div>
                 </div>
+                <p class="figure-caption"><strong>Figure:</strong> Visualization of ablation study for adaptive modulation (AM) and selective activation (SA).</p>
             </div>
         </section>
 
