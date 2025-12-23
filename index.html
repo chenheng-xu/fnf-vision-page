@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fourier Neural Filter as Generic Vision Backbone</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="title">Fourier Neural Filter as<br>Generic Vision Backbone</h1>
+            <div class="authors">
+                <div class="author-row">
+                    <span class="author"><strong>Chenheng Xu</strong><sup>1,2,3,4</sup></span>
+                    <span class="author"><strong>Yuanhao Ban</strong><sup>2</sup></span>
+                    <span class="author"><strong>Dan Wu</strong><sup>2</sup></span>
+                </div>
+                <div class="author-row">
+                    <span class="author"><strong>Cho-Jui Hsieh</strong><sup>2,✉</sup></span>
+                    <span class="author"><strong>Ying Nian Wu</strong><sup>2,✉</sup></span>
+                    <span class="author"><strong>Yixin Zhu</strong><sup>1,3,4,✉</sup></span>
+                </div>
+                <div class="affiliations">
+                    <div class="affil-row">
+                        <sup>1</sup>Peking University
+                        <sup>2</sup>University of California, Los Angeles
+                    </div>
+                    <div class="affil-row">
+                        <sup>3</sup>State Key Lab of General AI, Peking University
+                        <sup>4</sup>Beijing Key Laboratory of Behavior and Mental Health, Peking University
+                    </div>
+                </div>
+            </div>
+            <div class="links">
+                <a href="https://arxiv.org/abs/XXXX.XXXXX" class="btn btn-primary" target="_blank">📄 Paper</a>
+                <a href="https://github.com/chenheng-xu/fnf-vision" class="btn btn-secondary" target="_blank">💻 Code</a>
+                <a href="https://chenheng-xu.github.io/fnf-vision-page/" class="btn btn-secondary" target="_blank">🌐 Project Page</a>
+            </div>
+        </header>
+
+        <!-- Abstract -->
+        <section class="section">
+            <h2>Abstract</h2>
+            <p class="abstract">
+                Effective information extraction has long been a central challenge in Computer Vision. 
+                Transformer- and Mamba-based backbones have significantly advanced this field by providing 
+                powerful long-range modeling capability, even though they are initially developed for Natural 
+                Language Processing. Recent progress has highlighted the potential of Fourier Neural Operator (FNO), 
+                which, with its favorable quasi-linear complexity and strong global modeling capacity, offers a 
+                promising alternative for visual representation learning. However, FNO exhibits a fundamental 
+                limitation in capturing local high-frequency patterns due to the over-smoothing effect and bandwidth 
+                bottleneck.
+            </p>
+            <p class="abstract">
+                To address this limitation, we propose <strong>Vision Filter (ViF)</strong>, as a generic backbone 
+                for Computer Vision, consisting of two complementary components: <strong>adaptive modulation</strong> 
+                for enhancing sensitivity to high-frequency component in the frequency domain, and 
+                <strong>selective activation</strong> for balancing local time-domain and global frequency-domain 
+                information flow. Extensive experiments reveal that ViF consistently outperforms prominent variants 
+                of Transformer- and Mamba-based backbones across diverse visual tasks, including image classification, 
+                object detection, and semantic segmentation. ViF demonstrates lower computational complexity than 
+                Transformer-based models and better structural modeling than Mamba-based models, which suffer from 
+                spatial disruption due to their directional scanning mechanism.
+            </p>
+        </section>
+
+        <!-- Key Contributions -->
+        <section class="section">
+            <h2>Key Contributions</h2>
+            <ul class="contributions">
+                <li>We propose <strong>Fourier Neural Filter (FNF)</strong>, the first unified backbone that couples 
+                    time-domain and frequency-domain analysis, inherently preserving the spatial structure of 2D visual 
+                    representation.</li>
+                <li>We theoretically and empirically demonstrate that our proposed FNF resolves the inherent 
+                    over-smoothing effect and bandwidth bottleneck of the original FNO.</li>
+                <li>The proposed model <strong>ViF</strong> achieves state-of-the-art performance on three mainstream 
+                    visual tasks: ImageNet-1K classification, COCO object detection, and ADE20K semantic segmentation.</li>
+            </ul>
+        </section>
+
+        <!-- Method Overview -->
+        <section class="section">
+            <h2>Method Overview</h2>
+            <div class="method-grid">
+                <div class="method-card">
+                    <h3>Fourier Neural Filter (FNF)</h3>
+                    <p>An input-dependent integral kernel operator that enables adaptive information flow between 
+                    time and frequency domains, constructing a unified time-frequency representation space.</p>
+                </div>
+                <div class="method-card">
+                    <h3>Adaptive Modulation</h3>
+                    <p>Frequency balancing through amplitude-sensitive weighting, attenuating dominant low-frequency 
+                    components while enhancing weak high-frequency components.</p>
+                </div>
+                <div class="method-card">
+                    <h3>Selective Activation</h3>
+                    <p>Element-wise multiplication in time domain that achieves joint time-frequency modulation, 
+                    enhancing informative mid-/high-frequency components while suppressing redundant ones.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results -->
+        <section class="section">
+            <h2>Results</h2>
+            
+            <div class="results-grid">
+                <div class="result-card">
+                    <h3>ImageNet-1K Classification</h3>
+                    <div class="metric">
+                        <span class="metric-label">ViF-Tiny:</span>
+                        <span class="metric-value">83.8% Top-1</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">ViF-Small:</span>
+                        <span class="metric-value">84.5% Top-1</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">ViF-Base:</span>
+                        <span class="metric-value">85.2% Top-1</span>
+                    </div>
+                    <p class="result-note">Outperforms Transformer- and Mamba-based models with competitive computational efficiency</p>
+                </div>
+
+                <div class="result-card">
+                    <h3>COCO Object Detection</h3>
+                    <div class="metric">
+                        <span class="metric-label">ViF-Tiny:</span>
+                        <span class="metric-value">47.7 Box mAP</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">ViF-Small:</span>
+                        <span class="metric-value">49.1 Box mAP</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">ViF-Base:</span>
+                        <span class="metric-value">50.1 Box mAP</span>
+                    </div>
+                    <p class="result-note">State-of-the-art performance on dense prediction tasks</p>
+                </div>
+
+                <div class="result-card">
+                    <h3>ADE20K Segmentation</h3>
+                    <div class="metric">
+                        <span class="metric-label">ViF-Tiny:</span>
+                        <span class="metric-value">49.6 mIoU</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">ViF-Small:</span>
+                        <span class="metric-value">51.3 mIoU</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">ViF-Base:</span>
+                        <span class="metric-value">52.3 mIoU</span>
+                    </div>
+                    <p class="result-note">Superior performance with fewer parameters and FLOPs</p>
+                </div>
+            </div>
+
+            <div class="comparison-table">
+                <h3>Model Efficiency Comparison</h3>
+                <p class="table-note">Throughput tested on H100 GPU with batch size 128 and input resolution 224×224</p>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Model</th>
+                                <th>Params (M)</th>
+                                <th>FLOPs (G)</th>
+                                <th>Top-1 (%)</th>
+                                <th>Throughput (im/s)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="highlight">
+                                <td><strong>ViF-Tiny</strong></td>
+                                <td>29</td>
+                                <td>5.1</td>
+                                <td><strong>83.8</strong></td>
+                                <td>1549</td>
+                            </tr>
+                            <tr class="highlight">
+                                <td><strong>ViF-Small</strong></td>
+                                <td>45</td>
+                                <td>7.8</td>
+                                <td><strong>84.5</strong></td>
+                                <td>-</td>
+                            </tr>
+                            <tr class="highlight">
+                                <td><strong>ViF-Base</strong></td>
+                                <td>96</td>
+                                <td>16.7</td>
+                                <td><strong>85.2</strong></td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Swin-T</td>
+                                <td>28</td>
+                                <td>4.5</td>
+                                <td>81.3</td>
+                                <td>1217</td>
+                            </tr>
+                            <tr>
+                                <td>VMamba-T</td>
+                                <td>30</td>
+                                <td>4.9</td>
+                                <td>82.6</td>
+                                <td>1243</td>
+                            </tr>
+                            <tr>
+                                <td>ConvNeXt-T</td>
+                                <td>29</td>
+                                <td>4.5</td>
+                                <td>82.1</td>
+                                <td>1286</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Architecture -->
+        <section class="section">
+            <h2>Architecture</h2>
+            <p>
+                Our ViF model is structured into four hierarchical stages, mirroring the design principles of 
+                established vision backbones. The architecture consists of:
+            </p>
+            <ul class="architecture-list">
+                <li><strong>Stem Layer:</strong> Overlapped convolution for initial feature extraction</li>
+                <li><strong>Four Stages:</strong> Each stage contains multiple ViF blocks with down-sampling layers</li>
+                <li><strong>ViF Block:</strong> Comprises FNF module and FFN module with residual connections</li>
+                <li><strong>FNF Module:</strong> Two-branch design with local and global convolutions</li>
+            </ul>
+            <div class="architecture-note">
+                <p><strong>Key Innovation:</strong> Unlike FNO which uses a fixed integral kernel, FNF employs an 
+                input-dependent kernel that adaptively modulates information flow between time and frequency domains, 
+                addressing the over-smoothing effect and bandwidth bottleneck.</p>
+            </div>
+        </section>
+
+        <!-- Theoretical Contributions -->
+        <section class="section">
+            <h2>Theoretical Contributions</h2>
+            <div class="theoretical-grid">
+                <div class="theoretical-card">
+                    <h3>Bandwidth Bottleneck Analysis</h3>
+                    <p>We prove that any FNO layer with fixed bandwidth K has an irreducible truncation error 
+                    in the frequency domain, limiting its ability to capture high-frequency patterns.</p>
+                </div>
+                <div class="theoretical-card">
+                    <h3>Over-smoothing Effect</h3>
+                    <p>We demonstrate that multiplicative contraction on mid-/high-frequency modes accumulates 
+                    exponentially with depth, leading to progressive suppression of high-frequency information.</p>
+                </div>
+                <div class="theoretical-card">
+                    <h3>FNF Solution</h3>
+                    <p>Our proposed FNF with adaptive modulation and selective activation theoretically resolves 
+                    both limitations by enabling non-uniform frequency amplification and adaptive information flow.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Citation -->
+        <section class="section">
+            <h2>Citation</h2>
+            <div class="citation-box">
+                <pre><code>@article{xu2025fourier,
+  title={Fourier Neural Filter as Generic Vision Backbone},
+  author={Xu, Chenheng and Ban, Yuanhao and Wu, Dan and Hsieh, Cho-Jui and Wu, Ying Nian and Zhu, Yixin},
+  journal={arXiv preprint arXiv:XXXX.XXXXX},
+  year={2025}
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2025 The Authors. All rights reserved.</p>
+            <p class="footer-note">This work is submitted to ICLR 2026.</p>
+        </footer>
+    </div>
+</body>
+</html>
+
