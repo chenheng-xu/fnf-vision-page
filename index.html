@@ -38,10 +38,49 @@
             </div>
             <div class="links">
                 <a href="https://arxiv.org/abs/XXXX.XXXXX" class="btn btn-primary" target="_blank">📄 Paper</a>
-                <a href="https://github.com/chenheng-xu/fnf-vision" class="btn btn-secondary" target="_blank">💻 Code</a>
+                <a href="https://github.com/chenheng-xu/fnf-vision-code" class="btn btn-secondary" target="_blank">💻 Code</a>
                 <a href="https://chenheng-xu.github.io/fnf-vision-page/" class="btn btn-secondary" target="_blank">🌐 Project Page</a>
             </div>
+            <div class="badges">
+                <span class="badge">ICLR 2026</span>
+                <span class="badge">Vision Backbone</span>
+                <span class="badge">Fourier Transform</span>
+            </div>
         </header>
+
+        <!-- Teaser/Overview -->
+        <section class="section teaser-section">
+            <div class="teaser-content">
+                <div class="teaser-text">
+                    <h2>Unified Time-Frequency Vision Backbone</h2>
+                    <p class="teaser-description">
+                        ViF introduces the first unified backbone that couples time-domain and frequency-domain analysis, 
+                        achieving state-of-the-art performance across image classification, object detection, and semantic segmentation 
+                        while maintaining competitive computational efficiency.
+                    </p>
+                    <div class="teaser-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">85.2%</div>
+                            <div class="stat-label">ImageNet Top-1</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">50.1</div>
+                            <div class="stat-label">COCO Box mAP</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">52.3</div>
+                            <div class="stat-label">ADE20K mIoU</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="teaser-image">
+                    <div class="image-placeholder">
+                        <p>📊 Model Architecture Diagram</p>
+                        <small>Placeholder for model schematic figure</small>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- Abstract -->
         <section class="section">
@@ -86,21 +125,46 @@
         <!-- Method Overview -->
         <section class="section">
             <h2>Method Overview</h2>
+            <div class="method-intro">
+                <p>
+                    Our <strong>Fourier Neural Filter (FNF)</strong> extends the standard FNO by introducing an input-dependent 
+                    kernel function that enables selective activation of local time-domain and global frequency-domain information 
+                    flow through Hadamard product operations. This design addresses two fundamental limitations of FNO:
+                </p>
+            </div>
             <div class="method-grid">
                 <div class="method-card">
+                    <div class="method-icon">🔧</div>
                     <h3>Fourier Neural Filter (FNF)</h3>
                     <p>An input-dependent integral kernel operator that enables adaptive information flow between 
                     time and frequency domains, constructing a unified time-frequency representation space.</p>
+                    <div class="method-formula">
+                        <code>(K v)(x) = T(G(v) ⊙ P(v))(x)</code>
+                    </div>
                 </div>
                 <div class="method-card">
+                    <div class="method-icon">📊</div>
                     <h3>Adaptive Modulation</h3>
                     <p>Frequency balancing through amplitude-sensitive weighting, attenuating dominant low-frequency 
                     components while enhancing weak high-frequency components.</p>
+                    <div class="method-formula">
+                        <code>M(z) = z ⊙ [β · ||z||<sup>α</sup>]</code>
+                    </div>
                 </div>
                 <div class="method-card">
+                    <div class="method-icon">⚡</div>
                     <h3>Selective Activation</h3>
                     <p>Element-wise multiplication in time domain that achieves joint time-frequency modulation, 
                     enhancing informative mid-/high-frequency components while suppressing redundant ones.</p>
+                    <div class="method-formula">
+                        <code>F(G(v) ⊙ P(v)) = Ĝ(v) * P̂(v)</code>
+                    </div>
+                </div>
+            </div>
+            <div class="method-figure">
+                <div class="image-placeholder large">
+                    <p>🏗️ FNF Backbone Architecture</p>
+                    <small>Placeholder for FNF backbone schematic diagram</small>
                 </div>
             </div>
         </section>
@@ -253,17 +317,137 @@
                     <h3>Bandwidth Bottleneck Analysis</h3>
                     <p>We prove that any FNO layer with fixed bandwidth K has an irreducible truncation error 
                     in the frequency domain, limiting its ability to capture high-frequency patterns.</p>
+                    <div class="theorem-box">
+                        <strong>Proposition 1:</strong> If v is non-bandlimited, the truncation error satisfies:
+                        <code>inf<sub>F<sub>K</sub></sub> ||F<sub>K</sub>(v) - T(v)|| ≥ ||P<sub>K</sub><sup>⊥</sup> T(v)||</code>
+                    </div>
                 </div>
                 <div class="theoretical-card">
                     <h3>Over-smoothing Effect</h3>
                     <p>We demonstrate that multiplicative contraction on mid-/high-frequency modes accumulates 
                     exponentially with depth, leading to progressive suppression of high-frequency information.</p>
+                    <div class="theorem-box">
+                        <strong>Proposition 2:</strong> The overall frequency response |H<sub>L</sub>(k)| ≤ ρ<sup>L</sup> → 0 
+                        on {|k| ≥ k<sub>0</sub>} as L → ∞, causing over-smoothing.
+                    </div>
                 </div>
                 <div class="theoretical-card">
                     <h3>FNF Solution</h3>
                     <p>Our proposed FNF with adaptive modulation and selective activation theoretically resolves 
                     both limitations by enabling non-uniform frequency amplification and adaptive information flow.</p>
+                    <div class="theorem-box">
+                        <strong>Key Innovation:</strong> Input-dependent kernel κ(x,y;v) enables adaptive modulation 
+                        that preserves high-frequency components while maintaining stability.
+                    </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- Ablation Study -->
+        <section class="section">
+            <h2>Ablation Study</h2>
+            <p class="section-intro">
+                We conduct comprehensive ablation studies to validate the effectiveness of each component in our ViF model.
+            </p>
+            <div class="ablation-table">
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Model Variant</th>
+                                <th>Top-1 (%)</th>
+                                <th>Params (M)</th>
+                                <th>FLOPs (G)</th>
+                                <th>Throughput</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="highlight">
+                                <td><strong>ViF-T (Full)</strong></td>
+                                <td><strong>83.8</strong></td>
+                                <td>29</td>
+                                <td>5.1</td>
+                                <td>1549</td>
+                            </tr>
+                            <tr>
+                                <td>w/o LC-1</td>
+                                <td>83.6</td>
+                                <td>28</td>
+                                <td>5.0</td>
+                                <td>1585</td>
+                            </tr>
+                            <tr>
+                                <td>w/o LC-2</td>
+                                <td>83.4</td>
+                                <td>28</td>
+                                <td>5.0</td>
+                                <td>1589</td>
+                            </tr>
+                            <tr>
+                                <td>w/o Adaptive Modulation</td>
+                                <td>83.5</td>
+                                <td>29</td>
+                                <td>5.1</td>
+                                <td>1667</td>
+                            </tr>
+                            <tr>
+                                <td>w/o Selective Activation</td>
+                                <td>83.1</td>
+                                <td>25</td>
+                                <td>4.6</td>
+                                <td>1689</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="ablation-note">
+                <p><strong>Key Findings:</strong> Selective Activation (SA) has the largest impact on model performance, 
+                with accuracy dropping to 83.1% when removed. Both local convolutions (LC-1 and LC-2) contribute 
+                significantly to the model's effectiveness.</p>
+            </div>
+            <div class="ablation-visualization">
+                <div class="image-placeholder">
+                    <p>📈 Ablation Study Visualization</p>
+                    <small>Placeholder for ablation study figures (AM and SA effects)</small>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Start -->
+        <section class="section quick-start">
+            <h2>Quick Start</h2>
+            <div class="quick-start-content">
+                <div class="code-block">
+                    <h3>Installation</h3>
+                    <pre><code># Clone the repository
+git clone https://github.com/chenheng-xu/fnf-vision-code.git
+cd fnf-vision-code
+
+# Install dependencies
+pip install -r requirements.txt</code></pre>
+                </div>
+                <div class="code-block">
+                    <h3>Usage Example</h3>
+                    <pre><code>from fnf_vision import ViF
+
+# Initialize ViF model
+model = ViF(model_size='tiny')  # or 'small', 'base'
+
+# Load pretrained weights
+model.load_pretrained('vif_tiny.pth')
+
+# Forward pass
+output = model(input_image)</code></pre>
+                </div>
+            </div>
+            <div class="quick-start-links">
+                <a href="https://github.com/chenheng-xu/fnf-vision-code" class="btn btn-secondary" target="_blank">
+                    📚 View Full Documentation
+                </a>
+                <a href="https://github.com/chenheng-xu/fnf-vision-code#installation" class="btn btn-secondary" target="_blank">
+                    🚀 Get Started
+                </a>
             </div>
         </section>
 
@@ -280,10 +464,48 @@
             </div>
         </section>
 
+        <!-- News/Updates -->
+        <section class="section news-section">
+            <h2>News & Updates</h2>
+            <ul class="news-list">
+                <li>
+                    <span class="news-date">Dec 2025</span>
+                    <span class="news-content">Paper submitted to ICLR 2026</span>
+                </li>
+                <li>
+                    <span class="news-date">Dec 2025</span>
+                    <span class="news-content">Code repository released on GitHub</span>
+                </li>
+                <li>
+                    <span class="news-date">Dec 2025</span>
+                    <span class="news-content">Project webpage launched</span>
+                </li>
+            </ul>
+        </section>
+
         <!-- Footer -->
         <footer class="footer">
-            <p>&copy; 2025 The Authors. All rights reserved.</p>
-            <p class="footer-note">This work is submitted to ICLR 2026.</p>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>For questions and inquiries, please contact:</p>
+                    <ul class="contact-list">
+                        <li>Cho-Jui Hsieh: <a href="mailto:chohsieh@ucla.edu">chohsieh@ucla.edu</a></li>
+                        <li>Ying Nian Wu: <a href="mailto:ywu@stat.ucla.edu">ywu@stat.ucla.edu</a></li>
+                        <li>Yixin Zhu: <a href="mailto:yixin.zhu@pku.edu.cn">yixin.zhu@pku.edu.cn</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Acknowledgments</h4>
+                    <p>This work is supported in part by the National Natural Science Foundation of China, 
+                    the PKU-BingJi Joint Laboratory for Artificial Intelligence, and the National Comprehensive 
+                    Experimental Base for Governance of Intelligent Society.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 The Authors. All rights reserved.</p>
+                <p class="footer-note">This work is submitted to ICLR 2026.</p>
+            </div>
         </footer>
     </div>
 </body>

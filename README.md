@@ -1,7 +1,7 @@
 # Fourier Neural Filter as Generic Vision Backbone
 
 [![Paper](https://img.shields.io/badge/Paper-arXiv-red)](https://arxiv.org/abs/XXXX.XXXXX)
-[![Code](https://img.shields.io/badge/Code-GitHub-blue)](https://github.com/chenheng-xu/fnf-vision)
+[![Code](https://img.shields.io/badge/Code-GitHub-blue)](https://github.com/chenheng-xu/fnf-vision-code)
 [![Project Page](https://img.shields.io/badge/Project-Page-green)](https://chenheng-xu.github.io/fnf-vision-page/)
 
 Official project page for **Fourier Neural Filter as Generic Vision Backbone** (ICLR 2026).
@@ -22,7 +22,7 @@ We propose **Vision Filter (ViF)**, a novel generic backbone for Computer Vision
 ## Quick Links
 
 - 📄 [Paper](https://arxiv.org/abs/XXXX.XXXXX) (Coming soon)
-- 💻 [Code](https://github.com/chenheng-xu/fnf-vision) (Coming soon)
+- 💻 [Code](https://github.com/chenheng-xu/fnf-vision-code)
 - 🌐 [Project Page](https://chenheng-xu.github.io/fnf-vision-page/)
 
 ## Citation
