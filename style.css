@@ -378,19 +378,67 @@ body {
     color: var(--text-light);
 }
 
-/* Image Styles */
-.teaser-img,
-.method-img,
-.comparison-img,
-.architecture-img,
-.erf-img {
+/* Image Styles - Base */
+img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: auto;
+    -ms-interpolation-mode: bicubic;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+}
+
+/* Teaser Image - Medium size */
+.teaser-img {
     width: 100%;
-    max-width: 100%;
+    max-width: 600px;
     height: auto;
     border-radius: 0.5rem;
     border: 1px solid var(--border-color);
     box-shadow: var(--shadow);
-    margin: 1rem 0;
+    margin: 1rem auto;
+    display: block;
+    object-fit: contain;
+}
+
+/* Method Image - Medium size */
+.method-img {
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    margin: 1rem auto;
+    display: block;
+    object-fit: contain;
+}
+
+/* Comparison Image - Large but constrained */
+.comparison-img {
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    margin: 1rem auto;
+    display: block;
+    object-fit: contain;
+}
+
+/* Architecture Image - Large but constrained */
+.architecture-img {
+    width: 100%;
+    max-width: 1000px;
+    height: auto;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    margin: 1rem auto;
+    display: block;
+    object-fit: contain;
 }
 
 
@@ -413,12 +461,15 @@ body {
     text-align: center;
 }
 
-/* Ablation Images */
+/* Ablation Images - Smaller, consistent size */
 .ablation-images {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 1.5rem;
     margin: 1.5rem 0;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .ablation-image-item {
@@ -427,11 +478,14 @@ body {
 
 .ablation-img {
     width: 100%;
-    max-width: 100%;
+    max-width: 250px;
     height: auto;
     border-radius: 0.5rem;
     border: 1px solid var(--border-color);
     box-shadow: var(--shadow);
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
 }
 
 .image-label {
@@ -441,7 +495,7 @@ body {
     font-weight: 500;
 }
 
-/* ERF Visualization */
+/* ERF Visualization - Large but constrained */
 .erf-visualization {
     margin: 2rem 0;
     text-align: center;
@@ -449,19 +503,25 @@ body {
 
 .erf-img {
     width: 100%;
-    max-width: 900px;
+    max-width: 800px;
     height: auto;
     border-radius: 0.5rem;
     border: 1px solid var(--border-color);
     box-shadow: var(--shadow-lg);
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
 }
 
-/* Task Visualizations */
+/* Task Visualizations - Large images, constrained */
 .task-visualizations {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: 2rem;
     margin: 2rem 0;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .task-vis-item {
@@ -475,23 +535,29 @@ body {
 
 .task-img {
     width: 100%;
-    max-width: 100%;
+    max-width: 600px;
     height: auto;
     border-radius: 0.5rem;
     border: 1px solid var(--border-color);
     box-shadow: var(--shadow-lg);
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
 }
 
-/* Analysis Visualizations */
+/* Analysis Visualizations - Medium size, consistent */
 .analysis-visualizations {
     margin: 2rem 0;
 }
 
 .analysis-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 1.5rem;
     margin: 1.5rem 0;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .analysis-item {
@@ -500,12 +566,15 @@ body {
 
 .analysis-img {
     width: 100%;
-    max-width: 100%;
+    max-width: 400px;
     height: auto;
     border-radius: 0.5rem;
     border: 1px solid var(--border-color);
     box-shadow: var(--shadow);
     transition: transform 0.2s, box-shadow 0.2s;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
 }
 
 .analysis-img:hover {
@@ -1311,8 +1380,31 @@ tbody tr.highlight:hover {
     .teaser-img,
     .method-img,
     .comparison-img,
-    .architecture-img {
-        margin: 1rem 0;
+    .architecture-img,
+    .erf-img,
+    .task-img,
+    .analysis-img,
+    .ablation-img {
+        margin: 1rem auto;
+        max-width: 100% !important;
+    }
+
+    .ablation-images,
+    .analysis-grid,
+    .task-visualizations {
+        max-width: 100%;
+    }
+
+    .ablation-img {
+        max-width: 200px;
+    }
+
+    .analysis-img {
+        max-width: 100%;
+    }
+
+    .task-img {
+        max-width: 100%;
     }
 
     .nav-links {
