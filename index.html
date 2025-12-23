@@ -419,32 +419,272 @@
         <!-- Theoretical Contributions -->
         <section class="section">
             <h2>Theoretical Contributions</h2>
-            <div class="theoretical-grid">
-                <div class="theoretical-card">
-                    <h3>Bandwidth Bottleneck Analysis</h3>
-                    <p>We prove that any FNO layer with fixed bandwidth K has an irreducible truncation error 
-                    in the frequency domain, limiting its ability to capture high-frequency patterns.</p>
-                    <div class="theorem-box">
-                        <strong>Proposition 1:</strong> If v is non-bandlimited, the truncation error satisfies:
-                        <code>inf<sub>F<sub>K</sub></sub> ||F<sub>K</sub>(v) - T(v)|| ≥ ||P<sub>K</sub><sup>⊥</sup> T(v)||</code>
+            <p class="section-intro">
+                We provide rigorous theoretical analysis of FNO limitations and demonstrate how our proposed FNF addresses 
+                these fundamental issues through mathematical formulations and proofs.
+            </p>
+
+            <!-- Limitations of FNO -->
+            <div class="theoretical-subsection">
+                <h3>Limitations of Fourier Neural Operator (FNO)</h3>
+                
+                <div class="proposition-card">
+                    <div class="proposition-header">
+                        <span class="proposition-label">Proposition 1</span>
+                        <span class="proposition-title">Bandwidth Bottleneck</span>
+                    </div>
+                    <div class="proposition-content">
+                        <p class="proposition-text">
+                            Consider a periodic function <span class="math-var">v</span> expanded in a Fourier series. 
+                            Let <span class="math-var">P<sub>K</sub></span> denote the projection onto Fourier modes 
+                            <span class="math-set">{|k| ≤ K}</span>. Any FNO layer <span class="math-var">F<sub>K</sub>(v)</span> 
+                            with fixed bandwidth <span class="math-var">K</span> depends only on <span class="math-var">P<sub>K</sub></span>. 
+                            If <span class="math-var">v</span> is non-bandlimited, and the operator <span class="math-var">𝒯</span> 
+                            is not strictly low-pass, leading to an irreducible <em>truncation error</em> in the frequency domain:
+                        </p>
+                        <div class="math-formula">
+                            <div class="formula-main">
+                                <span class="math-op">inf</span><sub class="math-sub">F<sub>K</sub></sub> 
+                                <span class="math-norm">‖</span><span class="math-var">F<sub>K</sub>(v) - 𝒯(v)</span><span class="math-norm">‖</span>
+                                <span class="math-rel">≥</span>
+                                <span class="math-norm">‖</span><span class="math-var">P<sub>K</sub><sup>⊥</sup> 𝒯(v)</span><span class="math-norm">‖</span>
+                            </div>
+                        </div>
+                        <div class="proof-sketch">
+                            <strong>Proof sketch:</strong> FNO applies a fixed spectral map on <span class="math-set">{|k| ≤ K}</span> 
+                            and discards <span class="math-set">{|k| > K}</span>. Therefore, two inputs with identical 
+                            <span class="math-var">P<sub>K</sub></span> cannot be distinguished. The error lower bound follows 
+                            from orthogonal decomposition into <span class="math-var">P<sub>K</sub></span> and 
+                            <span class="math-var">P<sub>K</sub><sup>⊥</sup></span> components.
+                        </div>
                     </div>
                 </div>
-                <div class="theoretical-card">
-                    <h3>Over-smoothing Effect</h3>
-                    <p>We demonstrate that multiplicative contraction on mid-/high-frequency modes accumulates 
-                    exponentially with depth, leading to progressive suppression of high-frequency information.</p>
-                    <div class="theorem-box">
-                        <strong>Proposition 2:</strong> The overall frequency response |H<sub>L</sub>(k)| ≤ ρ<sup>L</sup> → 0 
-                        on {|k| ≥ k<sub>0</sub>} as L → ∞, causing over-smoothing.
+
+                <div class="proposition-card">
+                    <div class="proposition-header">
+                        <span class="proposition-label">Proposition 2</span>
+                        <span class="proposition-title">Over-smoothing Effect</span>
+                    </div>
+                    <div class="proposition-content">
+                        <p class="proposition-text">
+                            Let <span class="math-var">M<sub>ℓ</sub>(k)</span> be the per-layer spectral multipliers on 
+                            <span class="math-set">{|k| ≤ K}</span>. If there exists <span class="math-var">ρ ∈ (0,1)</span> 
+                            and <span class="math-var">k<sub>0</sub> ≤ K</span> such that 
+                            <span class="math-norm">|</span><span class="math-var">M<sub>ℓ</sub>(k)</span><span class="math-norm">|</span> 
+                            <span class="math-rel">≤</span> <span class="math-var">ρ</span> for all 
+                            <span class="math-norm">|</span><span class="math-var">k</span><span class="math-norm">|</span> 
+                            <span class="math-rel">≥</span> <span class="math-var">k<sub>0</sub></span> and all layers 
+                            <span class="math-var">ℓ</span>, then the overall frequency response 
+                            <span class="math-var">H<sub>L</sub>(k) = ∏<sub>ℓ=1</sub><sup>L</sup> M<sub>ℓ</sub>(k)</span> 
+                            can satisfy:
+                        </p>
+                        <div class="math-formula">
+                            <div class="formula-main">
+                                <span class="math-norm">|</span><span class="math-var">H<sub>L</sub>(k)</span><span class="math-norm">|</span>
+                                <span class="math-rel">≤</span>
+                                <span class="math-var">ρ<sup>L</sup></span>
+                                <span class="math-rel">→</span>
+                                <span class="math-num">0</span>
+                            </div>
+                            <div class="formula-condition">
+                                on <span class="math-set">{|k| ≥ k<sub>0</sub>}</span> as <span class="math-var">L → ∞</span>
+                            </div>
+                        </div>
+                        <p class="proposition-text">
+                            This leads to an <em>over-smoothing</em> spatial representation.
+                        </p>
+                        <div class="proof-sketch">
+                            <strong>Proof sketch:</strong> Multiplicative contraction on the mid-/high-frequency modes accumulates 
+                            exponentially with depth; coupled with the hard truncation outside <span class="math-set">{|k| ≤ K}</span>, 
+                            the output energy is concentrated in the low-frequency modes, while the high-frequency modes are 
+                            progressively suppressed.
+                        </div>
                     </div>
                 </div>
-                <div class="theoretical-card">
-                    <h3>FNF Solution</h3>
-                    <p>Our proposed FNF with adaptive modulation and selective activation theoretically resolves 
-                    both limitations by enabling non-uniform frequency amplification and adaptive information flow.</p>
-                    <div class="theorem-box">
-                        <strong>Key Innovation:</strong> Input-dependent kernel κ(x,y;v) enables adaptive modulation 
-                        that preserves high-frequency components while maintaining stability.
+            </div>
+
+            <!-- Fundamentals of FNF -->
+            <div class="theoretical-subsection">
+                <h3>Fundamentals of Fourier Neural Filter (FNF)</h3>
+                
+                <div class="definition-card">
+                    <div class="definition-header">
+                        <span class="definition-label">Definition 1</span>
+                        <span class="definition-title">FNO Integral Kernel</span>
+                    </div>
+                    <div class="definition-content">
+                        <p class="definition-text">
+                            FNO is defined via a fixed integral kernel operator:
+                        </p>
+                        <div class="math-formula">
+                            <div class="formula-main">
+                                <span class="math-group">(</span><span class="math-var">K v</span><span class="math-group">)</span><span class="math-group">(</span><span class="math-var">x</span><span class="math-group">)</span>
+                                <span class="math-rel">=</span>
+                                <span class="math-op">∫</span><sub class="math-sub">D</sub>
+                                <span class="math-var">κ(x, y) v(y)</span>
+                                <span class="math-op">d</span><span class="math-var">y</span>
+                            </div>
+                        </div>
+                        <p class="definition-text">
+                            where <span class="math-var">κ: D × D → ℝ</span> is the kernel function and 
+                            <span class="math-var">v: D → ℝ</span> is the input function. Through the Fourier transform, 
+                            FNO can be formulated in the frequency domain as:
+                        </p>
+                        <div class="math-formula">
+                            <div class="formula-main">
+                                <span class="math-group">(</span><span class="math-var">K v</span><span class="math-group">)</span><span class="math-group">(</span><span class="math-var">x</span><span class="math-group">)</span>
+                                <span class="math-rel">=</span>
+                                <span class="math-var">ℱ<sup>-1</sup></span><span class="math-group">(</span>
+                                <span class="math-var">R<sub>φ</sub></span>
+                                <span class="math-op">·</span>
+                                <span class="math-var">ℱ(v)</span>
+                                <span class="math-group">)</span><span class="math-group">(</span><span class="math-var">x</span><span class="math-group">)</span>
+                            </div>
+                        </div>
+                        <p class="definition-text">
+                            where <span class="math-var">R<sub>φ</sub> = ℱ(κ)</span> denotes the parameterized frequency-domain kernel.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="definition-card">
+                    <div class="definition-header">
+                        <span class="definition-label">Definition 2</span>
+                        <span class="definition-title">FNF Adaptive Integral Kernel</span>
+                    </div>
+                    <div class="definition-content">
+                        <p class="definition-text">
+                            FNF can be defined through an adaptive integral kernel operator:
+                        </p>
+                        <div class="math-formula">
+                            <div class="formula-main">
+                                <span class="math-group">(</span><span class="math-var">K v</span><span class="math-group">)</span><span class="math-group">(</span><span class="math-var">x</span><span class="math-group">)</span>
+                                <span class="math-rel">=</span>
+                                <span class="math-op">∫</span><sub class="math-sub">D</sub>
+                                <span class="math-var">κ(x, y; v) v(y)</span>
+                                <span class="math-op">d</span><span class="math-var">y</span>
+                            </div>
+                        </div>
+                        <p class="definition-text">
+                            where <span class="math-var">κ(x, y; v)</span> is the <strong>input-dependent</strong> kernel function. 
+                            In the implementation, FNF can also be formulated as:
+                        </p>
+                        <div class="math-formula">
+                            <div class="formula-main">
+                                <span class="math-group">(</span><span class="math-var">K v</span><span class="math-group">)</span><span class="math-group">(</span><span class="math-var">x</span><span class="math-group">)</span>
+                                <span class="math-rel">=</span>
+                                <span class="math-var">T</span><span class="math-group">(</span>
+                                <span class="math-var">G(v)</span>
+                                <span class="math-op">⊙</span>
+                                <span class="math-var">P(v)</span>
+                                <span class="math-group">)</span><span class="math-group">(</span><span class="math-var">x</span><span class="math-group">)</span>
+                            </div>
+                        </div>
+                        <div class="math-formula">
+                            <div class="formula-main">
+                                <span class="math-var">P(v)(x)</span>
+                                <span class="math-rel">=</span>
+                                <span class="math-var">ℱ<sup>-1</sup></span><span class="math-group">(</span>
+                                <span class="math-var">R<sub>φ</sub></span>
+                                <span class="math-op">·</span>
+                                <span class="math-var">ℱ(H(v))</span>
+                                <span class="math-group">)</span><span class="math-group">(</span><span class="math-var">x</span><span class="math-group">)</span>
+                            </div>
+                        </div>
+                        <p class="definition-text">
+                            where <span class="math-var">G(v)</span>, <span class="math-var">H(v)</span>, and <span class="math-var">T(v)</span> 
+                            denote linear transforms, and <span class="math-op">⊙</span> is the Hadamard product operation.
+                        </p>
+                        <div class="remark-box">
+                            <strong>Remark 1:</strong> The fundamental distinction between FNO and FNF lies in their kernel functions: 
+                            FNO employs a <strong>fixed kernel</strong> <span class="math-var">κ(x, y)</span>, whereas FNF applies an 
+                            <strong>input-dependent kernel</strong> <span class="math-var">κ(x,y;v)</span>, enabling adaptive information 
+                            flow modulation between time-domain and frequency-domain.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="definition-card">
+                    <div class="definition-header">
+                        <span class="definition-label">Definition 3</span>
+                        <span class="definition-title">Selective Activation</span>
+                    </div>
+                    <div class="definition-content">
+                        <p class="definition-text">
+                            The selective activation operates an element-wise multiplication in the time domain; in the frequency domain, 
+                            this operation is mathematically equivalent to the convolution operation:
+                        </p>
+                        <div class="math-formula">
+                            <div class="formula-main">
+                                <span class="math-var">ℱ</span><span class="math-group">(</span>
+                                <span class="math-var">G(v)</span>
+                                <span class="math-op">⊙</span>
+                                <span class="math-var">P(v)</span>
+                                <span class="math-group">)</span><span class="math-group">(</span><span class="math-var">ω</span><span class="math-group">)</span>
+                                <span class="math-rel">=</span>
+                                <span class="math-group">(</span>
+                                <span class="math-var">Ĝ(v)</span>
+                                <span class="math-op">*</span>
+                                <span class="math-var">P̂(v)</span>
+                                <span class="math-group">)</span><span class="math-group">(</span><span class="math-var">ω</span><span class="math-group">)</span>
+                            </div>
+                        </div>
+                        <p class="definition-text">
+                            This can be viewed as approximate magnitude modulation and phase addition:
+                        </p>
+                        <div class="math-formula">
+                            <div class="formula-main">
+                                <span class="math-group">(</span><span class="math-var">G(v)</span>
+                                <span class="math-op">⊙</span>
+                                <span class="math-var">P(v)</span><span class="math-group">)</span><sub class="math-sub">i</sub>
+                                <span class="math-rel">≈</span>
+                                <span class="math-norm">|</span><span class="math-var">G(v)<sub>i</sub></span><span class="math-norm">|</span>
+                                <span class="math-op">·</span>
+                                <span class="math-norm">|</span><span class="math-var">P(v)<sub>i</sub></span><span class="math-norm">|</span>
+                                <span class="math-op">·</span>
+                                <span class="math-var">e</span><sup class="math-sup">i(θ<sub>G(v)<sub>i</sub></sub> + θ<sub>P(v)<sub>i</sub></sub>)</sup>
+                            </div>
+                        </div>
+                        <div class="remark-box">
+                            <strong>Remark 2:</strong> Selective activation achieves joint time–frequency modulation: it enhances informative 
+                            mid-/high-frequency components while suppressing redundant low-frequency ones, alleviating the over-smoothing 
+                            effect and bandwidth bottleneck of FNO.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="definition-card">
+                    <div class="definition-header">
+                        <span class="definition-label">Definition 4</span>
+                        <span class="definition-title">Adaptive Modulation</span>
+                    </div>
+                    <div class="definition-content">
+                        <p class="definition-text">
+                            The adaptive modulation operates through an amplitude-sensitive weighting function to achieve frequency balancing:
+                        </p>
+                        <div class="math-formula">
+                            <div class="formula-main">
+                                <span class="math-var">ℳ(z)</span>
+                                <span class="math-rel">=</span>
+                                <span class="math-var">z</span>
+                                <span class="math-op">⊙</span>
+                                <span class="math-group">[</span>
+                                <span class="math-var">β</span>
+                                <span class="math-op">·</span>
+                                <span class="math-norm">‖</span><span class="math-var">z</span><span class="math-norm">‖</span><sup class="math-sup">α</sup>
+                                <span class="math-group">]</span>
+                            </div>
+                        </div>
+                        <p class="definition-text">
+                            where <span class="math-norm">‖</span><span class="math-var">z</span><span class="math-norm">‖</span> represents 
+                            the magnitude of complex-valued input <span class="math-var">z</span>, and <span class="math-var">α, β</span> 
+                            are learnable parameters.
+                        </p>
+                        <div class="remark-box">
+                            <strong>Remark 3:</strong> When <span class="math-var">α < 1</span>, the power-law weighting compresses the dynamic 
+                            range between frequency components, effectively attenuating dominant low-frequency components while relatively enhancing 
+                            weak high-frequency components. The adaptive parameter <span class="math-var">β</span> provides global scaling control.
+                        </div>
                     </div>
                 </div>
             </div>
