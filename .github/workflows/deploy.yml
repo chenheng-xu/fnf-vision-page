@@ -28,17 +28,15 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4
       
+      - name: Clean up unnecessary files
+        run: |
+          rm -f figures/*.pdf
+          rm -f .gitignore
+      
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: '.'
-          exclude-paths: |
-            .git
-            .github
-            .gitignore
-            LICENSE
-            README.md
-            figures/*.pdf
       
       - name: Deploy to GitHub Pages
         id: deployment
