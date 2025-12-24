@@ -36,6 +36,9 @@ jobs:
             .git
             .github
             .gitignore
+            LICENSE
+            README.md
+            figures/*.pdf
       
       - name: Deploy to GitHub Pages
         id: deployment
